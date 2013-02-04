@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main"
+    tools:ignore="MergeRootFrame" >
+    <ListView 
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"   >
+    </ListView>
+    <fragment class ="com.vsoued.gtd.InboxF"
+              android:id="@+id/inbox"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+    <fragment android:name="com.vsoued.gtd.NextActionF"
+              android:id="@+id/nextaction"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+    <fragment android:name="com.vsoued.gtd.ProjectsF"
+              android:id="@+id/projects"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+    <fragment android:name="com.vsoued.gtd.ScheduledF"
+              android:id="@+id/scheduled"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+    <fragment android:name="com.vsoued.gtd.PendingF"
+              android:id="@+id/pending"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+    <fragment android:name="com.vsoued.gtd.ReferencesF"
+              android:id="@+id/references"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+    <fragment android:name="com.vsoued.gtd.SomedayF"
+              android:id="@+id/someday"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+    
+    <TextView android:id="@id/android:empty"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:background="#FF0000"
+               android:text="No data"/>
+</LinearLayout>

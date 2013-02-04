@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GTDapp</string>
+    <string name="title_all">All</string>
+    <string name="title_email">E-Mail</string>
+    <string name="title_phonecalls">Phone Calls</string>
+    <string name="title_errands">Errands</string>
+    <string name="title_meetings">Meetings</string>
+    <string name="title_review">Review</string>
+    <string name="title_computer">Computer</string>
+    
+    <string name="subject">Subject:</string>
+    <string name="description">Description:</string>
+    <string name="priority">Priority:</string>
+    <string name="folder">Folder:</string>
+    
+    <string name="title_inbox">Inbox</string>
+    <string name="title_projects">Projects</string>
+    <string name="title_nextactions">Next Actions</string>
+    <string name="title_scheduled">Scheduled</string>
+    <string name="title_delegated">Delegated</string>
+    <string name="title_somedaymaybe">Someday, Maybe</string>
+    <string name="title_references">References</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    
+    <string-array name="folders_array">
+        <item>Inbox</item>
+        <item>Project</item>
+        <item>Next Action</item>
+        <item>Scheduled</item>
+        <item>Pending</item>
+        <item>Maybe</item>
+        <item>References</item>
+    </string-array>
+
+</resources>

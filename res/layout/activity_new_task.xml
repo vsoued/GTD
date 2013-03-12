@@ -4,55 +4,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="@string/subject"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/textbox1"
+        android:hint="@string/subject"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:ems="10" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="@string/description"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/textbox2"
+        android:hint="@string/description"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textMultiLine" />
 
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:text="@string/priority"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <RatingBar
         android:id="@+id/ratingBar1"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

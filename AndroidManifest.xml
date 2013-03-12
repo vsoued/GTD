@@ -3,10 +3,15 @@
     package="com.vsoued.gtd"
     android:versionCode="1"
     android:versionName="1.0" >
+    
 
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="17" />
+    
+    <uses-permission android:name="com.google.android.gm.permission.READ_CONTENT_PROVIDER" />
+     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -15,8 +20,7 @@
         android:theme="@style/AppTheme" >
         
         <activity
-            android:name="com.vsoued.gtd.Main"
-            android:label="@string/app_name" >
+            android:name="com.vsoued.gtd.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,16 +28,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.vsoued.gtd.Details"
-            android:label="@string/app_name" >
+            android:name="com.vsoued.gtd.Details">
             
         </activity>
         <activity
-            android:name="com.vsoued.gtd.NewTask"
-            android:label="@string/app_name" >
+            android:name="com.vsoued.gtd.NewTask">
             
         </activity>
         
+        <activity
+            android:name="com.vsoued.gtd.MailAccount">
+            
+        </activity>
     </application>
+    
+    
 
 </manifest>

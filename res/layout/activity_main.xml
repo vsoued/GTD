@@ -11,31 +11,42 @@
         android:layout_height="fill_parent"
         android:layout_weight="1"   >
     </ListView>
-    <fragment class ="com.vsoued.gtd.InboxF"
+    
+    
+    
+    <fragment class ="com.vsoued.gtd.Inbox"
               android:id="@+id/inbox"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
-    <fragment android:name="com.vsoued.gtd.NextActionF"
+    <fragment class ="com.vsoued.gtd.MailInbox"
+              android:id="@+id/mail_inbox"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+    <fragment class="com.vsoued.gtd.NextActionF"
               android:id="@+id/nextaction"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
-    <fragment android:name="com.vsoued.gtd.ProjectsF"
+    <fragment class="com.vsoued.gtd.ProjectsF"
               android:id="@+id/projects"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
-    <fragment android:name="com.vsoued.gtd.ScheduledF"
+    
+    <fragment class ="com.vsoued.gtd.ScheduledF"
               android:id="@+id/scheduled"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
-    <fragment android:name="com.vsoued.gtd.PendingF"
+    
+    <fragment class="com.vsoued.gtd.PendingF"
               android:id="@+id/pending"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
-    <fragment android:name="com.vsoued.gtd.ReferencesF"
+    
+    <fragment class="com.vsoued.gtd.ReferencesF"
               android:id="@+id/references"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
-    <fragment android:name="com.vsoued.gtd.SomedayF"
+    
+    <fragment class="com.vsoued.gtd.SomedayF"
               android:id="@+id/someday"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>

@@ -14,62 +14,85 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int content_discard=0x7f020000;
+        public static final int content_edit=0x7f020001;
+        public static final int content_new_event=0x7f020002;
+        public static final int content_save=0x7f020003;
+        public static final int device_access_new_account=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
     }
     public static final class id {
-        public static final int container=0x7f080005;
-        public static final int details_list=0x7f080000;
-        public static final int editText1=0x7f08000e;
-        public static final int editText2=0x7f080010;
-        public static final int inbox=0x7f080006;
-        public static final int menu_settings=0x7f080014;
-        public static final int nextaction=0x7f080007;
-        public static final int pending=0x7f08000a;
-        public static final int projects=0x7f080008;
-        public static final int ratingBar1=0x7f080013;
-        public static final int references=0x7f08000b;
-        public static final int scheduled=0x7f080009;
-        public static final int someday=0x7f08000c;
-        public static final int spinner1=0x7f080011;
-        public static final int text1=0x7f080001;
-        public static final int text2=0x7f080002;
-        public static final int text3=0x7f080003;
-        public static final int text4=0x7f080004;
-        public static final int textView1=0x7f08000d;
-        public static final int textView2=0x7f08000f;
-        public static final int textView3=0x7f080012;
+        public static final int container=0x7f080007;
+        public static final int details_list=0x7f080002;
+        public static final int inbox=0x7f080008;
+        public static final int mail_inbox=0x7f080009;
+        public static final int menu_add=0x7f080019;
+        public static final int menu_add_account=0x7f080018;
+        public static final int menu_delete=0x7f080016;
+        public static final int menu_discard=0x7f08001b;
+        public static final int menu_edit=0x7f080015;
+        public static final int menu_save=0x7f08001a;
+        public static final int menu_settings=0x7f080017;
+        public static final int nextaction=0x7f08000a;
+        public static final int password=0x7f080001;
+        public static final int pending=0x7f08000d;
+        public static final int projects=0x7f08000b;
+        public static final int ratingBar1=0x7f080014;
+        public static final int references=0x7f08000e;
+        public static final int scheduled=0x7f08000c;
+        public static final int someday=0x7f08000f;
+        public static final int spinner1=0x7f080012;
+        public static final int text1=0x7f080003;
+        public static final int text2=0x7f080004;
+        public static final int text3=0x7f080005;
+        public static final int text4=0x7f080006;
+        public static final int textView3=0x7f080013;
+        public static final int textbox1=0x7f080010;
+        public static final int textbox2=0x7f080011;
+        public static final int username=0x7f080000;
     }
     public static final class layout {
-        public static final int activity_details_view=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_new_task=0x7f030002;
-        public static final int list_item=0x7f030003;
+        public static final int activity_add_account=0x7f030000;
+        public static final int activity_details_view=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_new_task=0x7f030003;
+        public static final int list_item=0x7f030004;
     }
     public static final class menu {
-        public static final int activity_main=0x7f070000;
+        public static final int activity_details=0x7f070000;
+        public static final int activity_main=0x7f070001;
+        public static final int activity_new_task=0x7f070002;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
         public static final int description=0x7f040009;
         public static final int folder=0x7f04000b;
-        public static final int hello_world=0x7f040013;
-        public static final int menu_settings=0x7f040014;
+        public static final int hello_world=0x7f040015;
+        public static final int menu_add=0x7f040017;
+        public static final int menu_add_account=0x7f04001c;
+        public static final int menu_delete=0x7f040018;
+        public static final int menu_discard=0x7f04001a;
+        public static final int menu_edit=0x7f04001b;
+        public static final int menu_save=0x7f040019;
+        public static final int menu_settings=0x7f040016;
+        public static final int password=0x7f04000d;
         public static final int priority=0x7f04000a;
         public static final int subject=0x7f040008;
         public static final int title_all=0x7f040001;
         public static final int title_computer=0x7f040007;
-        public static final int title_delegated=0x7f040010;
+        public static final int title_delegated=0x7f040012;
         public static final int title_email=0x7f040002;
         public static final int title_errands=0x7f040004;
-        public static final int title_inbox=0x7f04000c;
+        public static final int title_inbox=0x7f04000e;
         public static final int title_meetings=0x7f040005;
-        public static final int title_nextactions=0x7f04000e;
+        public static final int title_nextactions=0x7f040010;
         public static final int title_phonecalls=0x7f040003;
-        public static final int title_projects=0x7f04000d;
-        public static final int title_references=0x7f040012;
+        public static final int title_projects=0x7f04000f;
+        public static final int title_references=0x7f040014;
         public static final int title_review=0x7f040006;
-        public static final int title_scheduled=0x7f04000f;
-        public static final int title_somedaymaybe=0x7f040011;
+        public static final int title_scheduled=0x7f040011;
+        public static final int title_somedaymaybe=0x7f040013;
+        public static final int username=0x7f04000c;
     }
     public static final class style {
         /** 

@@ -1,43 +1,74 @@
 package com.vsoued.gtd;
 
-import com.vsoued.gtd.Tasks.Task;
+import java.util.HashMap;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.TextView;
 
-public class NewTask extends Activity {
+import com.vsoued.gtd.Tasks.Task;
+
+public class Edit extends Activity{
     GTDDB db;
-    private String folder;
+    long id;
+    String[] fields;
+    int[] views;
+    public String folder;
+    HashMap<String, String>  values = new HashMap<String, String>();  
     
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.activity_new_task);
+
+       
+        
+        
         db = new GTDDB(getBaseContext());
+        fields = new String[]  {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION, Task.COLUMN_NAME_FOLDER, Task.COLUMN_NAME_MODIFICATION_DATE};
+        views = new int[] {R.id.textbox1, R.id.textbox2, R.id.spinner1, R.id.ratingBar1};
+        id = this.getIntent().getLongExtra("index", 1);
+        db.open();
+        Cursor c = db.showTask(id);
+        db.close();
+        ((EditText) findViewById(R.id.textbox1)).setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_SUBJECT)));
+        ((EditText) findViewById(R.id.textbox2)).setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_DESCRIPTION)));
         Spinner spinner = (Spinner) findViewById(R.id.spinner1);
         spinner.setOnItemSelectedListener(new SpinnerHandler());
+        
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence> (this, android.R.layout.simple_spinner_item, Task.FOLDER_ARRAY);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        
+        
+        
+       
+        
      // Create an ArrayAdapter using the string array and a default spinner layout
-     ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence> (this, android.R.layout.simple_spinner_item, Task.FOLDER_ARRAY);
-     // Specify the layout to use when the list of choices appears
-     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-     // Apply the adapter to the spinner
-     spinner.setAdapter(adapter);
-
-        // Set up the action bar to show a dropdown list.
-        final ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+     
+     
+     final ActionBar actionBar = getActionBar();
+     actionBar.setDisplayShowTitleEnabled(false);
+     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        
+        
     }
     
     private class SpinnerHandler implements OnItemSelectedListener{
@@ -56,11 +87,12 @@ public class NewTask extends Activity {
         }
         
     }
+        
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_new_task, menu);
+        inflater.inflate(R.menu.activity_details, menu);
         return true;
     }
     
@@ -73,9 +105,11 @@ public class NewTask extends Activity {
                 return true;
             case R.id.menu_save:
 //                ((Spinner) findViewById(R.id.spinner1)).get
+                values.put(Task.COLUMN_NAME_SUBJECT, ((EditText)findViewById(R.id.textbox1)).getText().toString());  
+                values.put(Task.COLUMN_NAME_DESCRIPTION, ((EditText)findViewById(R.id.textbox2)).getText().toString());
+                values.put(Task.COLUMN_NAME_FOLDER, folder); 
                 db.open();
-                db.insertTask(((EditText)findViewById(R.id.textbox1)).getText().toString(), 
-                        ((EditText)findViewById(R.id.textbox2)).getText().toString(), folder);
+                db.updateTask(id, values);
                 db.close();
 //                Mail m = new Mail("vsoued@gmail.com", "hek:190688"); 
 //                

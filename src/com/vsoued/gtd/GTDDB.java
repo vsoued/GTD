@@ -11,6 +11,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class GTDDB {
     private DBHelper helper;  
@@ -35,6 +36,7 @@ public class GTDDB {
     }
     
     public long insertTask(String subject, String description, String folder){
+        Log.i("DB", "INSERTING IN = "+folder);
         ContentValues values = new ContentValues();  
         values.put(Task.COLUMN_NAME_SUBJECT, subject);  
         values.put(Task.COLUMN_NAME_DESCRIPTION, description);
@@ -70,8 +72,10 @@ public class GTDDB {
     }
     
     public Cursor listTask(String folder){
+        Log.i("DB", "LISTING "+folder);
+
         String[] columns = new String[] {Task._ID, Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};  
-        Cursor cursor = db.query(Task.TABLE_NAME_TASKS,columns, Task.COLUMN_NAME_FOLDER+" = '"+folder+"'", null  
+        Cursor cursor = db.query(Task.TABLE_NAME_TASKS,columns,Task.COLUMN_NAME_FOLDER+" = '"+folder+"'", null  
              , null, null,Task.COLUMN_NAME_MODIFICATION_DATE);  
 //        if (cursor != null) {  
 //         cursor.moveToFirst(); 
@@ -79,7 +83,8 @@ public class GTDDB {
         return cursor;
     }
     
-    public Cursor showTask(int id){
+    public Cursor showTask(long id){
+        Log.i("DB", "DETALS FOR ID = "+id);
         String[] columns = new String[] {Task._ID, Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION, Task.COLUMN_NAME_FOLDER, Task.COLUMN_NAME_MODIFICATION_DATE};  
         Cursor cursor = db.query(Task.TABLE_NAME_TASKS,columns, Task._ID+" = "+id, null  
              , null, null,null);  
@@ -120,7 +125,7 @@ public class GTDDB {
     }
     
     public Cursor listActionByTag(String tag){
-        String[] columns = new String[] {Action.COLUMN_NAME_SUBJECT, Action.COLUMN_NAME_DESCRIPTION};  
+        String[] columns = new String[] {Action._ID, Action.COLUMN_NAME_SUBJECT, Action.COLUMN_NAME_DESCRIPTION};  
         Cursor cursor = db.query(Action.TABLE_NAME_ACTIONS,columns,Action.COLUMN_NAME_TAG+" = "+tag, null  
              , null, null,Action.COLUMN_NAME_PRIORITY);  
 //        if (cursor != null) {  
@@ -154,6 +159,8 @@ public class GTDDB {
     }
     
     public long updateTask(long id, HashMap<String, String> map){
+        Log.i("DB", "EDITING = "+id);
+        
         ContentValues values = new ContentValues(); 
             for (String val : map.keySet()){
                 values.put(val, map.get(val));

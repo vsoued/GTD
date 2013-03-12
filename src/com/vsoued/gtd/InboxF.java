@@ -1,6 +1,17 @@
 package com.vsoued.gtd;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+
+import javax.mail.Message;
+
 import com.vsoued.gtd.Tasks.Task;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -16,95 +27,63 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 
-public class InboxF extends ListFragment 
-            implements LoaderManager.LoaderCallbacks<Cursor> {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        public static final String ARG_SECTION_NUMBER = "section_number";
-        SimpleCursorAdapter adapter;
-        int mCurCheckPosition = 0;
-        private static GTDDB db;
-        Context context;
+public class InboxF extends GTDListF {
+//        int mCurCheckPosition = 0;
+       
+        String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
+        int[] views = {android.R.id.text1, android.R.id.text2};
+        String folder = Task.FOLDER_INBOX;
+        final String ACCOUNT_TYPE_GOOGLE = "com.google";
+        final String[] FEATURES_MAIL = {
+                "service_mail"
+        };
+        String selectedAccount;
+        
         public InboxF() {
         }
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
+            
+            super.columns = this.columns;
+            super.views = this.views;
+            super.folder = this.folder;
             super.onActivityCreated(savedInstanceState);
+            
+            
+        }  
+        
+        @Override
+        public void onResume(){
+        
            
-            db = new GTDDB(getActivity());
-            context = getActivity();
-            String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
-            int[] views = {android.R.id.text1, android.R.id.text2};
+                super.onResume();
+                // Get the account list, and pick the first one
+                AccountManager.get(context).getAccountsByTypeAndFeatures(ACCOUNT_TYPE_GOOGLE, FEATURES_MAIL,
+                        new AccountManagerCallback() {
+                            @Override
+                            public void run(AccountManagerFuture future) {
+                                Account[] accounts = null;
+                                try {
+                                    accounts = (Account[]) future.getResult();
+                                    if (accounts != null && accounts.length > 0) {
+                                        selectedAccount = accounts[0].name;
+                                        //queryLabels(selectedAccount);
+                                    }
+
+                                } catch (OperationCanceledException oce) {
+                                    // TODO: handle exception
+                                } catch (IOException ioe) {
+                                    // TODO: handle exception
+                                } catch (AuthenticatorException ae) {
+                                    // TODO: handle exception
+                                }
+                            }
+                        }, null );
+
             
-            // Create an empty adapter we will use to display the loaded data.
-            // We pass null for the cursor, then update it in onLoadFinished()
-            adapter = new SimpleCursorAdapter(getActivity(), 
-                    android.R.layout.simple_list_item_2, db.listTask(Task.FOLDER_INBOX), columns, views, 0);
-            setListAdapter(adapter);
-
-            // Prepare the loader.  Either re-connect with an existing one,
-            // or start a new one.
-            //getLoaderManager().initLoader(0, null, this);
-
-            if (savedInstanceState != null) {
-                // Restore last state for checked position.
-                mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
-            }
-        }
-        
-        @Override
-        public void onSaveInstanceState(Bundle outState) {
-            super.onSaveInstanceState(outState);
-            outState.putInt("curChoice", mCurCheckPosition);
-        }
-        
-        @Override
-        public void onListItemClick(ListView l, View v, int position, long id) {
-            showDetails(position);
-        }
-
-        /**
-         * Helper function to show the details of a selected item, either by
-         * displaying a fragment in-place in the current UI, or starting a
-         * whole new activity in which it is displayed.
-         */
-        void showDetails(int index) {
-            mCurCheckPosition = index;
-
-          
-//            Otherwise we need to launch a new activity to display
-//            the dialog fragment with selected text.
-            Intent intent = new Intent(context, Details.class);
-            //intent.setClass(getActivity(), Details.class);
-            intent.putExtra("index", 4);
-            context.startActivity(intent);
-        }
-        @Override
-        
-        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-         // This is called when a new Loader needs to be created.  This
-            // sample only has one Loader, so we don't care about the ID.
-            // First, pick the base URI to use depending on whether we are
-            // currently filtering.
+            super.onResume();
+                
             
-            return new CursorLoader(getActivity());
         }
-
-
-        @Override
-        public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
-            // TODO Auto-generated method stub
-            adapter.swapCursor(arg1);
-        }
-
-
-        @Override
-        public void onLoaderReset(Loader<Cursor> arg0) {
-            // TODO Auto-generated method stub
-            adapter.swapCursor(null);
-        }
-        
-    }
+}

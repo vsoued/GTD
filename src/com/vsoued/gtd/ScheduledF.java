@@ -1,14 +1,24 @@
 package com.vsoued.gtd;
 
-import android.app.ListFragment;
+import com.vsoued.gtd.Tasks.Task;
 
-public class ScheduledF extends ListFragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
-    public static final String ARG_SECTION_NUMBER = "section_number";
+import android.os.Bundle;
 
-    public ScheduledF() {
+public class ScheduledF extends GTDListF {
+   
+  
+    //int mCurCheckPosition = 0;
+    String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
+    int[] views = {android.R.id.text1, android.R.id.text2};
+    String folder = Task.FOLDER_INBOX;
+
+    public ScheduledF() {}
+  
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.columns = this.columns;
+        super.views = this.views;
+        super.folder = this.folder;
+        super.onActivityCreated(savedInstanceState);
     }
+    
 }

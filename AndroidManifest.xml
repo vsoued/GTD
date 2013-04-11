@@ -37,6 +37,11 @@
         </activity>
         
         <activity
+            android:name="com.vsoued.gtd.Edit">
+            
+        </activity>
+        
+        <activity
             android:name="com.vsoued.gtd.MailAccount">
             
         </activity>

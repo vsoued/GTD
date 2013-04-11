@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.vsoued.gtd.Tasks.Action;
 import com.vsoued.gtd.Tasks.Task;
 
 import android.accounts.Account;
@@ -19,6 +18,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.os.Bundle;
@@ -27,6 +27,7 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
@@ -35,9 +36,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 @SuppressLint("ValidFragment")
 public class Main extends Activity implements
@@ -71,30 +74,29 @@ public class Main extends Activity implements
 
         db = new GTDDB(this);
 
-        curPosition = 0;
+
+        SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActionBarThemedContextCompat(), R.array.folders_array,
+                android.R.layout.simple_dropdown_item_1line);
+       
         
         // Set up the action bar to show a dropdown list.
         final ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-
+        actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
+        
+        //ft.commit();
         // Set up the dropdown list navigation in the action bar.
-        actionBar.setListNavigationCallbacks(
         // Specify a SpinnerAdapter to populate the dropdown list.
-                new ArrayAdapter<String>(getActionBarThemedContextCompat(),
-                        android.R.layout.simple_list_item_1,
-                        android.R.id.text1, new String[] {
-                                getString(R.string.title_inbox),
-                                getString(R.string.title_nextactions),
-                                getString(R.string.title_projects),
-                                getString(R.string.title_scheduled),
-                                getString(R.string.title_delegated),
-                                getString(R.string.title_references),
-                                getString(R.string.title_somedaymaybe),}), this);
+        //actionBar.setSelectedNavigationItem(0);
+        curPosition = 0;
                 
        
         
     }
+
+               // TODO Auto-generated method stub
+            
 
     /**
      * Backward-compatible version of {@link ActionBar#getThemedContext()} that
@@ -163,22 +165,46 @@ public class Main extends Activity implements
         }
     }
 
+    @SuppressLint("NewApi")
     @Override
     public boolean onNavigationItemSelected(int position, long id) {
+//      ListContentFragment newFragment = new ListContentFragment();
+
+        FragmentTransaction ft = manager.beginTransaction();
+        for (int i : POSITIONS){
+            if (i == POSITIONS[position]){
+                ft.show(manager.findFragmentById(i));
+            } else {
+                ft.hide(manager.findFragmentById(i));
+            }
+            
+        }
+        ft.commit();
+        
+       // FragmentTransaction ft = manager.beginTransaction();
+        //Fragment curFragment = manager.findFragmentById(POSITIONS[curPosition]);
+        //Fragment newFragment = manager.findFragmentById(POSITIONS[position]);
+        
+        
+//      FragmentManager fragmentManager = getFragmentManager();
+//              FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         // When the given dropdown item is selected, show its contents in the
         // container view.
-        Fragment curFragment = manager.findFragmentById(POSITIONS[curPosition]);
+        Log.i("MAIN", "CHANGE FROM "+curPosition+" TO "+position);
+        //ft.hide(curFragment).show(newFragment).commit();
         
-        Fragment newfragment = manager.findFragmentById(POSITIONS[position]);
+        curPosition = position; 
+        
 //        if (true){
 //            ((GTDListF) newfragment)..onActivityCreated(null);
 //        }
-        manager.beginTransaction().hide(curFragment).show(newfragment).commit();
+        //manager.beginTransaction().hide(curFragment).show(newfragment).commit();
 //        Bundle args = new Bundle();
 //        args.putInt(InboxF.ARG_SECTION_NUMBER, position + 1);
 //        fragment.setArguments(args);
         
         return true;
+        
     }
 
 

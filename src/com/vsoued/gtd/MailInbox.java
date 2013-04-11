@@ -38,6 +38,7 @@ public class MailInbox extends ListFragment{
         adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1);
         super.onActivityCreated(savedInstanceState);
         
+        
 //        Void[] n = {null};
 //        String[] msgs={};
 //        try {
@@ -69,14 +70,37 @@ public class MailInbox extends ListFragment{
         final ActionBar actionBar = getActivity().getActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        loadEmail();
       
     }  
     
-    @Override
-    public void onResume(){
-            super.onResume();
-            
-            
+//    @Override
+//    public void onResume(){
+//            super.onResume();
+//            
+//            
+////            Void[] n = {null};
+////            String[] msgs={};
+////            try {
+////                msgs = mail.new GetMail().execute(n).get();
+////                
+////                Log.i("MAIL_INBOX", "AFTER GET_MAIL");
+////            } catch (InterruptedException e) {
+////                // TODO Auto-generated catch block
+////                Log.e("MAIL_INBOX", "ERROR");
+////                e.printStackTrace();
+////            } catch (ExecutionException e) {
+////                // TODO Auto-generated catch block
+////                Log.e("MAIL_INBOX", "ERROR");
+////                e.printStackTrace();
+////            }
+////            
+////            adapter.addAll(msgs);
+//////            = new ArrayAdapter<String>(getActivity(), 
+//////                    android.R.layout.simple_list_item_1, msgs);
+////            
+////            setListAdapter(adapter);
+//            
 //            Void[] n = {null};
 //            String[] msgs={};
 //            try {
@@ -93,38 +117,43 @@ public class MailInbox extends ListFragment{
 //                e.printStackTrace();
 //            }
 //            
-//            adapter.addAll(msgs);
-////            = new ArrayAdapter<String>(getActivity(), 
+////            adapter = new ArrayAdapter<String>(getActivity(), 
 ////                    android.R.layout.simple_list_item_1, msgs);
+//           adapter.addAll(msgs);
 //            
+////            Log.i("MAIL_INBOX", "adapter created");
+//    //
+////            
 //            setListAdapter(adapter);
-            
-            Void[] n = {null};
-            String[] msgs={};
-            try {
-                msgs = mail.new GetMail().execute(n).get();
-                
-                Log.i("MAIL_INBOX", "AFTER GET_MAIL");
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                Log.e("MAIL_INBOX", "ERROR");
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                // TODO Auto-generated catch block
-                Log.e("MAIL_INBOX", "ERROR");
-                e.printStackTrace();
-            }
-            
-//            adapter = new ArrayAdapter<String>(getActivity(), 
-//                    android.R.layout.simple_list_item_1, msgs);
-           adapter.addAll(msgs);
-            
-//            Log.i("MAIL_INBOX", "adapter created");
-    //
+//
 //            
-            setListAdapter(adapter);
-
+//        
+//    }
+    
+    private void loadEmail(){
+        Void[] n = {null};
+        String[] msgs={};
+        try {
+            msgs = mail.new GetMail().execute(n).get();
             
+            Log.i("MAIL_INBOX", "AFTER GET_MAIL");
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            Log.e("MAIL_INBOX", "ERROR");
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            // TODO Auto-generated catch block
+            Log.e("MAIL_INBOX", "ERROR");
+            e.printStackTrace();
+        }
         
+//        adapter = new ArrayAdapter<String>(getActivity(), 
+//                android.R.layout.simple_list_item_1, msgs);
+       adapter.addAll(msgs);
+        
+//        Log.i("MAIL_INBOX", "adapter created");
+//
+//        
+        setListAdapter(adapter);
     }
 }

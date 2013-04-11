@@ -74,7 +74,7 @@ public class NewTask extends Activity {
             case R.id.menu_save:
 //                ((Spinner) findViewById(R.id.spinner1)).get
                 db.open();
-                db.insertTask(((EditText)findViewById(R.id.textbox1)).getText().toString(), 
+                db.createTask(((EditText)findViewById(R.id.textbox1)).getText().toString(), 
                         ((EditText)findViewById(R.id.textbox2)).getText().toString(), folder);
                 db.close();
 //                Mail m = new Mail("vsoued@gmail.com", "hek:190688"); 

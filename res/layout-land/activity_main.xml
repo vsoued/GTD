@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Main"
-    tools:ignore="MergeRootFrame" >
+    tools:ignore="MergeRootFrame"
+    android:orientation = "horizontal" >
+    
     <ListView 
         android:id="@android:id/list"
         android:layout_width="0dip"
@@ -18,17 +20,10 @@
               android:id="@+id/inbox"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
-    <!-- <fragment class ="com.vsoued.gtd.MailInbox"
+    <fragment class ="com.vsoued.gtd.MailInbox"
               android:id="@+id/mail_inbox"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"/>  -->
-    
-    <fragment class ="com.vsoued.gtd.ScheduledF"
-              android:id="@+id/scheduled"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"/>
-    
-    
+              android:layout_height="match_parent"/> 
     <fragment class="com.vsoued.gtd.NextActionF"
               android:id="@+id/nextaction"
               android:layout_width="match_parent"
@@ -38,7 +33,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
     
-    
+    <fragment class ="com.vsoued.gtd.ScheduledF"
+              android:id="@+id/scheduled"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
     
     <fragment class="com.vsoued.gtd.PendingF"
               android:id="@+id/pending"

@@ -38,12 +38,12 @@
     
     <string-array name="folders_array">
         <item>Inbox</item>
-        <item>Project</item>
-        <item>Next Action</item>
+        <item>Next Actions</item>
+        <item>Projects</item>
         <item>Scheduled</item>
-        <item>Pending</item>
-        <item>Maybe</item>
+        <item>Pending/Delegated</item>
         <item>References</item>
+        <item>Someday/Maybe</item>
     </string-array>
 
 </resources>

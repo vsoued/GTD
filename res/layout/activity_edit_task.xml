@@ -4,20 +4,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <ListView 
+        android:id="@+id/edit_list"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"   >
+    </ListView>
+        
     <EditText
-        android:id="@+id/username"
-        android:hint="@string/username"
+        android:id="@+id/textbox1"
         android:layout_width="match_parent"
+        android:hint="@string/subject"
         android:layout_height="wrap_content"
-        android:ems="10" 
-        android:inputType="textEmailAddress"/>
+        android:ems="10" />
 
     <EditText
-        android:id="@+id/password"
-        android:hint="@string/password"
+        android:id="@+id/textbox2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textMultiLine|textCapSentences" />
 
 </LinearLayout>

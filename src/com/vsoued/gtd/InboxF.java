@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import android.widget.SimpleCursorAdapter;
 public class InboxF extends GTDListF {
 //        int mCurCheckPosition = 0;
        
+        String TAG = "INBOX_F";
         String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
         int[] views = {android.R.id.text1, android.R.id.text2};
         String folder = Task.FOLDER_INBOX;
@@ -44,7 +46,8 @@ public class InboxF extends GTDListF {
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
-            
+            Log.i(TAG, "CREATED");
+            super.TAG = TAG;
             super.columns = this.columns;
             super.views = this.views;
             super.folder = this.folder;
@@ -59,27 +62,27 @@ public class InboxF extends GTDListF {
            
                 super.onResume();
                 // Get the account list, and pick the first one
-                AccountManager.get(context).getAccountsByTypeAndFeatures(ACCOUNT_TYPE_GOOGLE, FEATURES_MAIL,
-                        new AccountManagerCallback() {
-                            @Override
-                            public void run(AccountManagerFuture future) {
-                                Account[] accounts = null;
-                                try {
-                                    accounts = (Account[]) future.getResult();
-                                    if (accounts != null && accounts.length > 0) {
-                                        selectedAccount = accounts[0].name;
-                                        //queryLabels(selectedAccount);
-                                    }
-
-                                } catch (OperationCanceledException oce) {
-                                    // TODO: handle exception
-                                } catch (IOException ioe) {
-                                    // TODO: handle exception
-                                } catch (AuthenticatorException ae) {
-                                    // TODO: handle exception
-                                }
-                            }
-                        }, null );
+//                AccountManager.get(context).getAccountsByTypeAndFeatures(ACCOUNT_TYPE_GOOGLE, FEATURES_MAIL,
+//                        new AccountManagerCallback() {
+//                            @Override
+//                            public void run(AccountManagerFuture future) {
+//                                Account[] accounts = null;
+//                                try {
+//                                    accounts = (Account[]) future.getResult();
+//                                    if (accounts != null && accounts.length > 0) {
+//                                        selectedAccount = accounts[0].name;
+//                                        //queryLabels(selectedAccount);
+//                                    }
+//
+//                                } catch (OperationCanceledException oce) {
+//                                    // TODO: handle exception
+//                                } catch (IOException ioe) {
+//                                    // TODO: handle exception
+//                                } catch (AuthenticatorException ae) {
+//                                    // TODO: handle exception
+//                                }
+//                            }
+//                        }, null );
 
             
             super.onResume();

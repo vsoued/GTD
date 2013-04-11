@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.vsoued.gtd.Tasks.Task;
 import com.vsoued.gtd.Tasks.Project;
-import com.vsoued.gtd.Tasks.Action;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -32,6 +31,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Task.COLUMN_NAME_SUBJECT + " TEXT,"
                 + Task.COLUMN_NAME_DESCRIPTION + " TEXT,"
                 + Task.COLUMN_NAME_FOLDER + " TEXT,"
+                + Task.COLUMN_NAME_TAG + " TEXT,"
+                + Task.COLUMN_NAME_PRIORITY + " INTEGER,"
+                + Task.COLUMN_NAME_PROJECT_ID + " INTEGER,"
+                + Task.COLUMN_NAME_DATE + " TEXT,"
+                + Task.COLUMN_NAME_TIME + " TEXT,"
+                + Task.COLUMN_NAME_CONTACT + " TEXT,"
                 + Task.COLUMN_NAME_CREATE_DATE + " INTEGER,"
                 + Task.COLUMN_NAME_MODIFICATION_DATE + " INTEGER"
                 + ");");
@@ -40,20 +45,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Project._ID + " INTEGER PRIMARY KEY,"
                 + Project.COLUMN_NAME_PROJECT_NAME + " TEXT,"
                 + Project.COLUMN_NAME_PROJECT_DESCRIPTION + " TEXT,"
+                + Project.COLUMN_NAME_PRIORITY + " INTEGER,"
+                + Project.COLUMN_NAME_PROJECT_ID + " INTEGER,"
                 + Project.COLUMN_NAME_CREATE_DATE + " INTEGER,"
-                + Project.COLUMN_NAME_MODIFICATION_DATE + " INTEGER,"
-                + Project.COLUMN_NAME_PRIORITY + " INTEGER"
-                + ");");
-          
-        db.execSQL("CREATE TABLE " + Action.TABLE_NAME_ACTIONS + " ("
-                + Action._ID + " INTEGER PRIMARY KEY,"
-                + Action.COLUMN_NAME_SUBJECT + " TEXT,"
-                + Action.COLUMN_NAME_DESCRIPTION + " TEXT,"
-                + Action.COLUMN_NAME_PROJECT_ID + " INTEGER,"
-                + Action.COLUMN_NAME_TAG + " TEXT,"
-                + Action.COLUMN_NAME_PRIORITY + " INTEGER,"
-                + Action.COLUMN_NAME_CREATE_DATE + " INTEGER,"
-                + Action.COLUMN_NAME_MODIFICATION_DATE + " INTEGER"
+                + Project.COLUMN_NAME_MODIFICATION_DATE + " INTEGER"
                 + ");");
     }
 

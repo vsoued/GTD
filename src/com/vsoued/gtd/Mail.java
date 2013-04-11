@@ -303,7 +303,7 @@ public class Mail extends javax.mail.Authenticator {
                 for (int i = 0; i < msgs.length; i++){
                     String from_name = msgs[i].getFrom()[0].toString();
                     int index = from_name.indexOf("<");
-                    from_name = from_name.substring(0, index);
+                    //from_name = from_name.substring(index);
                     readable[readable.length-i-1] = from_name +"\n"+ msgs[i].getSubject();
                 }
                 return readable;

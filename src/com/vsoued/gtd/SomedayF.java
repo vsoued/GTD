@@ -11,7 +11,7 @@ public class SomedayF extends GTDListF {
     final String TAG = "SOMEDAY_F";
     String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
     int[] views = {android.R.id.text1, android.R.id.text2};
-    String folder = Task.FOLDER_SCHEDULED;
+    String folder = Task.FOLDER_SOMEDAY;
 
     public SomedayF() {}
   

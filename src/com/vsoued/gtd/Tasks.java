@@ -1,7 +1,5 @@
 package com.vsoued.gtd;
 
-import java.util.HashMap;
-
 import android.provider.BaseColumns;
 
 public final class Tasks {
@@ -83,6 +81,8 @@ public final class Tasks {
          */
         public static final String COLUMN_NAME_TIME = "time";
         
+        //public static final String[] CREATE_TASK = {._ID,.
+        
         
         
         
@@ -97,14 +97,17 @@ public final class Tasks {
         public static final String FOLDER_SOMEDAY = "someday";
         public static final String FOLDER_REFERENCES = "references";
         
-        public static final String[] FOLDER_ARRAY = {
+        public static final String[] FOLDERS_ARRAY = {
             FOLDER_INBOX,
             FOLDER_ACTIONS,
+            Project.TABLE_NAME_PROJECTS,
             FOLDER_SCHEDULED,
             FOLDER_PENDING,
             FOLDER_SOMEDAY,
             FOLDER_REFERENCES
             };
+        
+        
         
         /**
          * Action tags

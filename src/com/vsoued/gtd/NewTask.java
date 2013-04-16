@@ -1,61 +1,71 @@
 package com.vsoued.gtd;
 
+
+import com.vsoued.gtd.Tasks.Project;
 import com.vsoued.gtd.Tasks.Task;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RatingBar;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 public class NewTask extends Activity {
     GTDDB db;
     private String folder;
+    Spinner spinner;
+    Spinner spinner2;
+    RatingBar bar;
+    SparseIntArray map;
     
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
         db = new GTDDB(getBaseContext());
-        Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-        spinner.setOnItemSelectedListener(new SpinnerHandler());
-     // Create an ArrayAdapter using the string array and a default spinner layout
-     ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence> (this, android.R.layout.simple_spinner_item, Task.FOLDER_ARRAY);
-     // Specify the layout to use when the list of choices appears
-     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-     // Apply the adapter to the spinner
-     spinner.setAdapter(adapter);
+        
+        spinner = (Spinner) findViewById(R.id.spinner1);    
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, R.array.folders_array, 
+                android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        
+        spinner2 = (Spinner) findViewById(R.id.spinner2);    
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        db.open();
+        Cursor c = db.projectSpinner();
+        SpinnerAdapter adapter2 = new SimpleCursorAdapter (this,android.R.layout.simple_spinner_dropdown_item, c, new String[]{Project.COLUMN_NAME_PROJECT_NAME}, new int[]{android.R.id.text1}, 0);
+        spinner2.setAdapter(adapter2);
+        map = new SparseIntArray();
+        int x = -1;
+        c.moveToPosition(-1);
+        while (!c.isLast()){
+            c.moveToNext();
+            x++;
+            map.put(x, c.getInt(c.getColumnIndex(Project._ID))); 
+        }
+        
+        db.close();
+        spinner2.setContentDescription("hjhgdkjshaf");
+        spinner2.setPrompt("prompsjhjkshfgkj");
+        spinner2.setEmptyView((TextView)findViewById(R.id.no_projects));
+        
+        bar = (RatingBar) findViewById(R.id.ratingBar1);
 
-        // Set up the action bar to show a dropdown list.
         final ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
     }
     
-    private class SpinnerHandler implements OnItemSelectedListener{
-        
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int pos,
-                long id) {
-            // TODO Auto-generated method stub
-            folder = Task.FOLDER_ARRAY[pos];
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            // TODO Auto-generated method stub
-            folder = Task.FOLDER_INBOX;
-        }
-        
-    }
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,10 +82,16 @@ public class NewTask extends Activity {
                 finish();
                 return true;
             case R.id.menu_save:
-//                ((Spinner) findViewById(R.id.spinner1)).get
+                folder = Task.FOLDERS_ARRAY[spinner.getSelectedItemPosition()];
+                Log.i("NEW TASK", "PUTTING TO PROJECT "+map.get(spinner2.getSelectedItemPosition()));
                 db.open();
-                db.createTask(((EditText)findViewById(R.id.textbox1)).getText().toString(), 
-                        ((EditText)findViewById(R.id.textbox2)).getText().toString(), folder);
+                if (folder.equals(Project.TABLE_NAME_PROJECTS)){
+                    db.createProject(((EditText)findViewById(R.id.textbox1)).getText().toString(),
+                            ((EditText)findViewById(R.id.textbox2)).getText().toString(), (int)bar.getRating(),map.get(spinner2.getSelectedItemPosition()));
+                } else {
+                    db.createTask(((EditText)findViewById(R.id.textbox1)).getText().toString(), 
+                            ((EditText)findViewById(R.id.textbox2)).getText().toString(), folder,(int)bar.getRating(), map.get(spinner2.getSelectedItemPosition()));
+                }
                 db.close();
 //                Mail m = new Mail("vsoued@gmail.com", "hek:190688"); 
 //                

@@ -16,6 +16,8 @@
     <string name="folder">Folder:</string>
     <string name="username">Gmail Account Username</string>
     <string name="password">Gmail Account Password</string>
+    <string name="add_to_project">Add to Project:</string>
+    <string name="no_projects">No Projects</string>
     
     <string name="title_inbox">Inbox</string>
     <string name="title_projects">Projects</string>

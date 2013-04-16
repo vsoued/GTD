@@ -1,5 +1,6 @@
 package com.vsoued.gtd;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -50,6 +51,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Project.COLUMN_NAME_CREATE_DATE + " INTEGER,"
                 + Project.COLUMN_NAME_MODIFICATION_DATE + " INTEGER"
                 + ");");
+        
+       
+        db.execSQL("INSERT INTO "+Project.TABLE_NAME_PROJECTS+" VALUES (0,'Select Project','',0,0,0,0)");
+//        ContentValues values = new ContentValues();
+//        values.put(Project._ID, 0);
+//        values.put(Project.COLUMN_NAME_PROJECT_NAME, " ");  
+//        values.put(Project.COLUMN_NAME_PROJECT_DESCRIPTION, " ");
+//        values.put(Project.COLUMN_NAME_PRIORITY, 0);
+//        values.put(Project.COLUMN_NAME_CREATE_DATE, 0);
+//        values.put(Project.COLUMN_NAME_MODIFICATION_DATE, 0);
+//        db.insert(Project.TABLE_NAME_PROJECTS, null, values); 
     }
 
     /**

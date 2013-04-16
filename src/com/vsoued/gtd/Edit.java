@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,8 +16,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
 
@@ -25,67 +28,54 @@ import com.vsoued.gtd.Tasks.Task;
 public class Edit extends Activity{
     GTDDB db;
     long id;
-    String[] fields;
-    int[] views;
     public String folder;
-    HashMap<String, String>  values = new HashMap<String, String>();  
+    ContentValues values;
+    Spinner spinner;
+    RatingBar bar;
+    EditText text1;
+    EditText text2;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       
+        setContentView(R.layout.activity_edit_task);
         
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
         
         db = new GTDDB(getBaseContext());
-        fields = new String[]  {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
-        views = new int[] {R.id.textbox1, R.id.textbox2};
+        values = new ContentValues();
+        
         id = this.getIntent().getLongExtra("index", 1);
+        Log.i("EDIT", "EDIT INDEX "+id );
+        text1 = ((EditText) findViewById(R.id.textbox1));
+        text2 = ((EditText) findViewById(R.id.textbox2));
+        spinner = (Spinner) findViewById(R.id.spinner1); 
+        SpinnerAdapter spinadapter = ArrayAdapter.createFromResource(this, R.array.folders_array, 
+                android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinadapter);
+        bar = (RatingBar) findViewById(R.id.ratingBar1);
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        for (int i = 0; i< Task.FOLDERS_ARRAY.length; i++){
+            map.put(Task.FOLDERS_ARRAY[i], i);
+        }
+       
         db.open();
         Cursor c = db.showTask(id);
-//        ((EditText) findViewById(R.id.textbox1)).setText(c.getString(0));
-//        ((EditText) findViewById(R.id.textbox2)).setText(c.getString(1));
-        SimpleCursorAdapter prjName = new SimpleCursorAdapter(this, R.layout.activity_edit_task, c, fields, views, 0);
-        setContentView(R.layout.activity_edit_task);
-        ((ListView) findViewById(R.id.edit_list)).setAdapter(prjName);
-        db.close();
-        Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-        //spinner.setOnItemSelectedListener(new SpinnerHandler());
-        
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence> (this, android.R.layout.simple_spinner_item, Task.FOLDER_ARRAY);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        //spinner.setAdapter(adapter);
-        
-   
-        
-        //db.close();
-        
-        
-        
        
         
-     // Create an ArrayAdapter using the string array and a default spinner layout
+        c.moveToFirst();
+        text1.setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_SUBJECT)));
+        text2.setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_DESCRIPTION)));
+        spinner.setSelection(map.get(c.getString(c.getColumnIndex(Task.COLUMN_NAME_FOLDER))));
+        bar.setRating((float)c.getInt(c.getColumnIndex(Task.COLUMN_NAME_PRIORITY)));
+        
+        
+        db.close();       
+
      
     }
     
-    private class SpinnerHandler implements OnItemSelectedListener{
-        
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int pos,
-                long id) {
-            // TODO Auto-generated method stub
-            folder = Task.FOLDER_ARRAY[pos];
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            // TODO Auto-generated method stub
-            folder = Task.FOLDER_INBOX;
-        }
-        
-    }
-        
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,9 +93,10 @@ public class Edit extends Activity{
                 return true;
             case R.id.menu_save:
 //                ((Spinner) findViewById(R.id.spinner1)).get
-                values.put(Task.COLUMN_NAME_SUBJECT, ((EditText)findViewById(R.id.textbox1)).getText().toString());  
-                values.put(Task.COLUMN_NAME_DESCRIPTION, ((EditText)findViewById(R.id.textbox2)).getText().toString());
-                values.put(Task.COLUMN_NAME_FOLDER, Task.FOLDER_INBOX); 
+                values.put(Task.COLUMN_NAME_SUBJECT, (text1.getText().toString()));  
+                values.put(Task.COLUMN_NAME_DESCRIPTION, (text2.getText().toString()));
+                values.put(Task.COLUMN_NAME_FOLDER, Task.FOLDERS_ARRAY[spinner.getSelectedItemPosition()]);
+                values.put(Task.COLUMN_NAME_PRIORITY, (int)bar.getRating());
                 db.open();
                 db.updateTask(id, values);
                 db.close();

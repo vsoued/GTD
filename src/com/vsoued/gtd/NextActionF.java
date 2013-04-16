@@ -15,54 +15,28 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-public class NextActionF extends ListFragment {
+public class NextActionF extends GTDListF {
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
 
     String TAG = "NEXT_ACTION_F";
-    SimpleCursorAdapter adapter;
-    private static GTDDB db;
-    Context context;
-    public String folder;
-    public String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
-    public int[] views = {android.R.id.text1, android.R.id.text2};
+    String folder = Task.FOLDER_ACTIONS;
+    String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
+    int[] views = {android.R.id.text1, android.R.id.text2};
     
     public NextActionF() {
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         Log.i(TAG, "CREATED");
-        db = new GTDDB(getActivity());
-        context = getActivity();
-    }
-    
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        db.open();
-        showDetails(position);
-        db.close();
-    }
+        super.TAG = TAG;
+        super.columns = this.columns;
+        super.views = this.views;
+        super.folder = this.folder;        
+        super.onActivityCreated(savedInstanceState);
 
-    void showDetails(long id) {
-        
-        Intent intent = new Intent(context, Details.class);
-        intent.putExtra("index", id);
-        context.startActivity(intent);
-    }
-    
-    @Override
-    public void onStart(){
-        super.onStart();
-        Log.i(TAG, "SHOW "+folder);
-
-        db.open();
-        adapter = new SimpleCursorAdapter(getActivity(), 
-                android.R.layout.simple_list_item_2, db.listTask(Task.FOLDER_ACTIONS), columns, views, 0);
-        setListAdapter(adapter);
-        db.close();
     }
 }

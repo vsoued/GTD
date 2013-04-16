@@ -61,7 +61,7 @@ public class Main extends Activity implements
         R.id.references,
         R.id.someday};
     FragmentManager manager = getFragmentManager();
-    private int curPosition;
+    //private int curPosition;
     private ArrayList<Mail> accounts;
     
     
@@ -85,11 +85,7 @@ public class Main extends Activity implements
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
         
-        //ft.commit();
-        // Set up the dropdown list navigation in the action bar.
-        // Specify a SpinnerAdapter to populate the dropdown list.
-        //actionBar.setSelectedNavigationItem(0);
-        curPosition = 0;
+        //curPosition = 0;
                 
        
         
@@ -165,10 +161,8 @@ public class Main extends Activity implements
         }
     }
 
-    @SuppressLint("NewApi")
     @Override
     public boolean onNavigationItemSelected(int position, long id) {
-//      ListContentFragment newFragment = new ListContentFragment();
 
         FragmentTransaction ft = manager.beginTransaction();
         for (int i : POSITIONS){
@@ -181,27 +175,13 @@ public class Main extends Activity implements
         }
         ft.commit();
         
-       // FragmentTransaction ft = manager.beginTransaction();
-        //Fragment curFragment = manager.findFragmentById(POSITIONS[curPosition]);
-        //Fragment newFragment = manager.findFragmentById(POSITIONS[position]);
+       
         
         
-//      FragmentManager fragmentManager = getFragmentManager();
-//              FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        // When the given dropdown item is selected, show its contents in the
-        // container view.
-        Log.i("MAIN", "CHANGE FROM "+curPosition+" TO "+position);
-        //ft.hide(curFragment).show(newFragment).commit();
+//      
+        //Log.i("MAIN", "CHANGE FROM "+curPosition+" TO "+position);
         
-        curPosition = position; 
-        
-//        if (true){
-//            ((GTDListF) newfragment)..onActivityCreated(null);
-//        }
-        //manager.beginTransaction().hide(curFragment).show(newfragment).commit();
-//        Bundle args = new Bundle();
-//        args.putInt(InboxF.ARG_SECTION_NUMBER, position + 1);
-//        fragment.setArguments(args);
+        //curPosition = position; 
         
         return true;
         
@@ -210,39 +190,14 @@ public class Main extends Activity implements
 
     @Override
     protected void onResume() {
-      db.open();
+      //db.open();
       super.onResume();
     }
 
     @Override
     protected void onPause() {
-      db.close();
+      //db.close();
       super.onPause();
     }
-    
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-//        fragment.
-//        mFragment = (LabelListFragment)fragment;
-//        mFragment.setItemClickedListener(this);
-//
-//        mAdapter = new SimpleCursorAdapter(this, R.layout.label_list_item, null,
-//                COLUMNS_TO_SHOW, LAYOUT_ITEMS);
-//        mFragment.setListAdapter(mAdapter);
-    }
-
-    
-
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-
+ 
 }

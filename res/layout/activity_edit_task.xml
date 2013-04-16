@@ -3,19 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <ListView 
-        android:id="@+id/edit_list"
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"   >
-    </ListView>
         
     <EditText
         android:id="@+id/textbox1"
         android:layout_width="match_parent"
         android:hint="@string/subject"
         android:layout_height="wrap_content"
+        android:inputType="textMultiLine|textCapSentences"
         android:ems="10" />
 
     <EditText
@@ -24,5 +18,40 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textMultiLine|textCapSentences" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="0dip"
+            android:layout_weight="0.6"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+            
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/priority"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <RatingBar
+                android:id="@+id/ratingBar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

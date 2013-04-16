@@ -1,5 +1,6 @@
 package com.vsoued.gtd;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -8,8 +9,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 import com.vsoued.gtd.Tasks.Task;
 
@@ -17,21 +24,29 @@ import com.vsoued.gtd.Tasks.Task;
 public class Details extends Activity{
     GTDDB db;
     long id;
-    String[] fields;
-    int[] views;
+    TextView text1;
+    TextView text2;
+    TextView text3;
+    TextView text4;
+    RatingBar bar;
+    
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_details_view);
         
-        
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
         
         db = new GTDDB(getBaseContext());
-        fields = new String[]  {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION, Task.COLUMN_NAME_FOLDER, Task.COLUMN_NAME_MODIFICATION_DATE};
-        views = new int[] {R.id.text1, R.id.text2, R.id.text3, R.id.text4};
         id = this.getIntent().getLongExtra("index", 1);
         
-        
+        text1 = (TextView) findViewById(R.id.text1);
+        text2 = (TextView) findViewById(R.id.text2);
+        text3 = (TextView) findViewById(R.id.text3);
+        text4 = (TextView) findViewById(R.id.text4);
+        bar = (RatingBar) findViewById(R.id.ratingBar1);
         
         
     }
@@ -70,11 +85,11 @@ public class Details extends Activity{
         super.onResume();
         db.open();
         Cursor c = db.showTask(id);
-        
-   
-        SimpleCursorAdapter prjName = new SimpleCursorAdapter( this, R.layout.activity_details_view, c, fields, views, 0);
-        setContentView(R.layout.activity_details_view);
-        ((ListView) findViewById(R.id.details_list)).setAdapter(prjName);
+        c.moveToFirst();
+        text1.setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_SUBJECT)));
+        text2.setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_DESCRIPTION)));
+        text3.setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_FOLDER)));
+        bar.setRating((float)c.getInt(c.getColumnIndex(Task.COLUMN_NAME_PRIORITY)));
         db.close();
     }
 }

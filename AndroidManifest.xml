@@ -45,6 +45,11 @@
             android:name="com.vsoued.gtd.MailAccount">
             
         </activity>
+        
+        <activity
+            android:name="com.vsoued.gtd.ProjectView">
+            
+        </activity>
     </application>
     
     

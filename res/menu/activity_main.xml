@@ -17,5 +17,11 @@
         android:showAsAction="ifRoom"
         android:title="@string/menu_add"
         android:icon="@drawable/content_new_event"/>
+     <item
+        android:id="@+id/menu_search"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="Search"
+        android:icon="@drawable/action_search"/>
 
 </menu>

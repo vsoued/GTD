@@ -1,7 +1,6 @@
 package com.vsoued.gtd;
 
 
-import com.vsoued.gtd.Tasks.Project;
 import com.vsoued.gtd.Tasks.Task;
 
 import android.app.ActionBar;
@@ -28,12 +27,13 @@ public class NewTask extends Activity {
     Spinner spinner2;
     RatingBar bar;
     SparseIntArray map;
+    String path;
     
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
         db = new GTDDB(getBaseContext());
-        
+        path = "";
         spinner = (Spinner) findViewById(R.id.spinner1);    
         // Create an ArrayAdapter using the string array and a default spinner layout
         SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, R.array.folders_array, 
@@ -44,7 +44,7 @@ public class NewTask extends Activity {
         // Create an ArrayAdapter using the string array and a default spinner layout
         db.open();
         Cursor c = db.projectSpinner();
-        SpinnerAdapter adapter2 = new SimpleCursorAdapter (this,android.R.layout.simple_spinner_dropdown_item, c, new String[]{Project.COLUMN_NAME_PROJECT_NAME}, new int[]{android.R.id.text1}, 0);
+        SpinnerAdapter adapter2 = new SimpleCursorAdapter (this,android.R.layout.simple_spinner_dropdown_item, c, new String[]{Task.COLUMN_NAME_SUBJECT}, new int[]{android.R.id.text1}, 0);
         spinner2.setAdapter(adapter2);
         map = new SparseIntArray();
         int x = -1;
@@ -52,13 +52,11 @@ public class NewTask extends Activity {
         while (!c.isLast()){
             c.moveToNext();
             x++;
-            map.put(x, c.getInt(c.getColumnIndex(Project._ID))); 
+            map.put(x, c.getInt(c.getColumnIndex(Task._ID))); 
         }
         
         db.close();
-        spinner2.setContentDescription("hjhgdkjshaf");
-        spinner2.setPrompt("prompsjhjkshfgkj");
-        spinner2.setEmptyView((TextView)findViewById(R.id.no_projects));
+        
         
         bar = (RatingBar) findViewById(R.id.ratingBar1);
 
@@ -82,17 +80,23 @@ public class NewTask extends Activity {
                 finish();
                 return true;
             case R.id.menu_save:
+                int id = map.get(spinner2.getSelectedItemPosition());
+                db.open();
+                Log.i("NEW TASK", "project "+id);
+                while (id > 0){
+                    Log.i("NEW TASK", "project "+id);
+                    Cursor c = db.oneProject(id);
+                    c.moveToFirst();
+                    path = c.getString(c.getColumnIndex(Task.COLUMN_NAME_SUBJECT)) + "/ "+ path;
+                    id = c.getInt(c.getColumnIndex(Task.COLUMN_NAME_PROJECT_ID));
+                    Log.i("NEW TASK", "path "+path);
+                }
                 folder = Task.FOLDERS_ARRAY[spinner.getSelectedItemPosition()];
                 Log.i("NEW TASK", "PUTTING TO PROJECT "+map.get(spinner2.getSelectedItemPosition()));
-                db.open();
-                if (folder.equals(Project.TABLE_NAME_PROJECTS)){
-                    db.createProject(((EditText)findViewById(R.id.textbox1)).getText().toString(),
-                            ((EditText)findViewById(R.id.textbox2)).getText().toString(), (int)bar.getRating(),map.get(spinner2.getSelectedItemPosition()));
-                } else {
                     db.createTask(((EditText)findViewById(R.id.textbox1)).getText().toString(), 
-                            ((EditText)findViewById(R.id.textbox2)).getText().toString(), folder,(int)bar.getRating(), map.get(spinner2.getSelectedItemPosition()));
-                }
+                            ((EditText)findViewById(R.id.textbox2)).getText().toString(), folder,(int)bar.getRating(), map.get(spinner2.getSelectedItemPosition()),path);
                 db.close();
+                
 //                Mail m = new Mail("vsoued@gmail.com", "hek:190688"); 
 //                
 //                String[] toArr = {"vsoued@gmail.com", "helfon.soued@gmail.com"}; 

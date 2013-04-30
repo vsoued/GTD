@@ -36,6 +36,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -85,6 +86,12 @@ public class Main extends Activity implements
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
         
+//        if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM)) {
+//           actionBar.setSelectedNavigationItem(
+//                    savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
+//        } else {
+//            actionBar.setSelectedNavigationItem(0);
+//        }
         //curPosition = 0;
                 
        
@@ -136,7 +143,6 @@ public class Main extends Activity implements
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_add_account:
-                
                 Intent intent = new Intent(this, MailAccount.class);
                 this.startActivityForResult(intent, 0);
                 return true;
@@ -146,6 +152,9 @@ public class Main extends Activity implements
                 return true;
             case R.id.menu_settings:
                 return true;
+            case R.id.menu_search:
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(getCurrentFocus(), InputMethodManager.SHOW_IMPLICIT);
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -185,19 +194,6 @@ public class Main extends Activity implements
         
         return true;
         
-    }
-
-
-    @Override
-    protected void onResume() {
-      //db.open();
-      super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-      //db.close();
-      super.onPause();
     }
  
 }

@@ -32,7 +32,7 @@ public class InboxF extends GTDListF {
 //        int mCurCheckPosition = 0;
        
         String TAG = "INBOX_F";
-        String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
+        String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_PATH};
         int[] views = {android.R.id.text1, android.R.id.text2};
         String folder = Task.FOLDER_INBOX;
         final String ACCOUNT_TYPE_GOOGLE = "com.google";

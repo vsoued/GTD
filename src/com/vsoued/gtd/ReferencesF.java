@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class ReferencesF extends GTDListF {
    
     final String TAG = "REFERENCES_F";
-    String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
+    String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_PATH};
     int[] views = {android.R.id.text1, android.R.id.text2};
     String folder = Task.FOLDER_REFERENCES;
 

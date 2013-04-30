@@ -28,6 +28,7 @@ public class Details extends Activity{
     TextView text2;
     TextView text3;
     TextView text4;
+    TextView path;
     RatingBar bar;
     
     
@@ -46,6 +47,7 @@ public class Details extends Activity{
         text2 = (TextView) findViewById(R.id.text2);
         text3 = (TextView) findViewById(R.id.text3);
         text4 = (TextView) findViewById(R.id.text4);
+        path = (TextView) findViewById(R.id.path);
         bar = (RatingBar) findViewById(R.id.ratingBar1);
         
         
@@ -89,6 +91,7 @@ public class Details extends Activity{
         text1.setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_SUBJECT)));
         text2.setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_DESCRIPTION)));
         text3.setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_FOLDER)));
+        path.setText(c.getString(c.getColumnIndex(Task.COLUMN_NAME_PATH)));
         bar.setRating((float)c.getInt(c.getColumnIndex(Task.COLUMN_NAME_PRIORITY)));
         db.close();
     }

@@ -1,6 +1,5 @@
 package com.vsoued.gtd;
 
-import com.vsoued.gtd.Tasks.Project;
 import com.vsoued.gtd.Tasks.Task;
 
 import android.app.Fragment;
@@ -19,9 +18,9 @@ public class ProjectsF extends GTDListF {
     final String TAG = "PROJECTS_F";
     //String[] columns = {Task.COLUMN_NAME_FOLDER, Task.COLUMN_NAME_DESCRIPTION};
 
-    String[] columns = {Project.COLUMN_NAME_PROJECT_NAME, Project.COLUMN_NAME_PROJECT_DESCRIPTION};
+    String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
     int[] views = {android.R.id.text1, android.R.id.text2};
-    String folder = Project.TABLE_NAME_PROJECTS;
+    String folder = Task.FOLDER_PROJECTS;
     
 
     public ProjectsF() {
@@ -51,6 +50,8 @@ public class ProjectsF extends GTDListF {
         db.open();
         adapter = new SimpleCursorAdapter(context, 
                 android.R.layout.simple_list_item_2, db.listProject(), columns, views, 0);
+        adapter.setStringConversionColumn(adapter.getCursor().getColumnIndex(Task.COLUMN_NAME_SUBJECT));
+        adapter.setFilterQueryProvider(new MyFilterQueryProvider());
         setListAdapter(adapter);
         db.close();
     }

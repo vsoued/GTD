@@ -23,7 +23,7 @@ public class NextActionF extends GTDListF {
 
     String TAG = "NEXT_ACTION_F";
     String folder = Task.FOLDER_ACTIONS;
-    String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_DESCRIPTION};
+    String[] columns = {Task.COLUMN_NAME_SUBJECT, Task.COLUMN_NAME_PATH};
     int[] views = {android.R.id.text1, android.R.id.text2};
     
     public NextActionF() {

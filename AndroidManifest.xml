@@ -21,6 +21,9 @@
         
         <activity
             android:name="com.vsoued.gtd.Main">
+            <!-- android:windowSoftInputMode="adjustPan|adjustResize" -->
+            
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

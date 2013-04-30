@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.vsoued.gtd.Tasks.Task;
-import com.vsoued.gtd.Tasks.Project;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -39,29 +38,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Task.COLUMN_NAME_TIME + " TEXT,"
                 + Task.COLUMN_NAME_CONTACT + " TEXT,"
                 + Task.COLUMN_NAME_CREATE_DATE + " INTEGER,"
-                + Task.COLUMN_NAME_MODIFICATION_DATE + " INTEGER"
-                + ");");
-        
-        db.execSQL("CREATE TABLE " + Project.TABLE_NAME_PROJECTS + " ("
-                + Project._ID + " INTEGER PRIMARY KEY,"
-                + Project.COLUMN_NAME_PROJECT_NAME + " TEXT,"
-                + Project.COLUMN_NAME_PROJECT_DESCRIPTION + " TEXT,"
-                + Project.COLUMN_NAME_PRIORITY + " INTEGER,"
-                + Project.COLUMN_NAME_PROJECT_ID + " INTEGER,"
-                + Project.COLUMN_NAME_CREATE_DATE + " INTEGER,"
-                + Project.COLUMN_NAME_MODIFICATION_DATE + " INTEGER"
+                + Task.COLUMN_NAME_MODIFICATION_DATE + " INTEGER,"
+                + Task.COLUMN_NAME_PATH + " TEXT"
                 + ");");
         
        
-        db.execSQL("INSERT INTO "+Project.TABLE_NAME_PROJECTS+" VALUES (0,'Select Project','',0,0,0,0)");
-//        ContentValues values = new ContentValues();
-//        values.put(Project._ID, 0);
-//        values.put(Project.COLUMN_NAME_PROJECT_NAME, " ");  
-//        values.put(Project.COLUMN_NAME_PROJECT_DESCRIPTION, " ");
-//        values.put(Project.COLUMN_NAME_PRIORITY, 0);
-//        values.put(Project.COLUMN_NAME_CREATE_DATE, 0);
-//        values.put(Project.COLUMN_NAME_MODIFICATION_DATE, 0);
-//        db.insert(Project.TABLE_NAME_PROJECTS, null, values); 
+        db.execSQL("INSERT INTO "+Task.TABLE_NAME_TASKS+" VALUES (0,'','','"+Task.FOLDER_PROJECTS+"','',0,0,0,0,'',0,0,'')");
     }
 
     /**

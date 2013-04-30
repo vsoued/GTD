@@ -40,6 +40,12 @@ public final class Tasks {
         public static final String COLUMN_NAME_MODIFICATION_DATE = "modified";
         
         /**
+         * Column name for the PATH
+         * <P>Type: INTEGER (long from System.curentTimeMillis())</P>
+         */
+        public static final String COLUMN_NAME_PATH = "path";
+        
+        /**
          * Column name for the folder the task is in
          * <P>Type: TEXT</P>
          */
@@ -92,6 +98,7 @@ public final class Tasks {
          */
         public static final String FOLDER_INBOX = "inbox";
         public static final String FOLDER_ACTIONS = "actions";
+        public static final String FOLDER_PROJECTS = "projects";
         public static final String FOLDER_SCHEDULED = "scheduled";
         public static final String FOLDER_PENDING = "pending";
         public static final String FOLDER_SOMEDAY = "someday";
@@ -100,7 +107,7 @@ public final class Tasks {
         public static final String[] FOLDERS_ARRAY = {
             FOLDER_INBOX,
             FOLDER_ACTIONS,
-            Project.TABLE_NAME_PROJECTS,
+            FOLDER_PROJECTS,
             FOLDER_SCHEDULED,
             FOLDER_PENDING,
             FOLDER_SOMEDAY,
@@ -119,60 +126,6 @@ public final class Tasks {
         public static final String TAG_OFFICE = "office";
         public static final String TAG_EMAIL = "email";
         public static final String TAG_MEETING = "meeting";
-    }
-    
-    public static final class Project implements BaseColumns {
-        
-        // This class cannot be instantiated
-        private Project() {}
-
-        /**
-         * The table names offered by this provider
-         */
-        
-        public static final String TABLE_NAME_PROJECTS = "projects";
-
-        /*
-         * Column definitions
-         */
-
-        /**
-         * Column name for the project names
-         * <P>Type: TEXT</P>
-         */
-        public static final String COLUMN_NAME_PROJECT_NAME = "project_name";
-        
-        /**
-         * Column name for the project descritption
-         * <P>Type: TEXT</P>
-         */
-        public static final String COLUMN_NAME_PROJECT_DESCRIPTION = "project_description";
-        
-        /**
-         * Column name for the creation timestamp
-         * <P>Type: INTEGER (long from System.curentTimeMillis())</P>
-         */
-        public static final String COLUMN_NAME_CREATE_DATE = "created";
-
-        /**
-         * Column name for the modification timestamp
-         * <P>Type: INTEGER (long from System.curentTimeMillis())</P>
-         */
-        public static final String COLUMN_NAME_MODIFICATION_DATE = "modified";
-        
-        /**
-         * Column name for the action priority
-         * <P>Type: INTEGER</P>
-         */
-        public static final String COLUMN_NAME_PRIORITY = "priority";
-        
-        /**
-         * Column name for the project the task is in
-         * <P>Type: INTEGER</P>
-         */
-        public static final String COLUMN_NAME_PROJECT_ID = "project_id";
-
-        
     }
         
 }

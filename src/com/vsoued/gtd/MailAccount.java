@@ -11,10 +11,12 @@ import android.widget.EditText;
 import com.vsoued.gtd.Tasks.Task;
 
 public class MailAccount extends Activity {
+    GTDDB db;
     
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
+        db = new GTDDB(getBaseContext());
      
     }
     
@@ -35,11 +37,12 @@ public class MailAccount extends Activity {
                 finish();
                 return true;
             case R.id.menu_save:
+                String user = ((EditText) findViewById(R.id.username)).getText().toString();
+                String password = ((EditText) findViewById(R.id.password)).getText().toString();
                 Intent data = new Intent();
-                data.putExtra("auth", new String[]{
-                        ((EditText) findViewById(R.id.username)).getText().toString(),
-                        ((EditText) findViewById(R.id.password)).getText().toString()}); 
+                data.putExtra("auth", new String[]{user,password}); 
                 setResult(RESULT_OK, data); 
+                db.addAccount(user, password,  "imap.gmail.com", "993", "smtp.gmail.com", "465");
                 finish();
                 return true;
             default:

@@ -35,7 +35,7 @@ public class ProjectView extends Activity{
     RatingBar bar;
     ExpandableListView expandableList;
     String[] groupFrom = {Task.COLUMN_NAME_SUBJECT};
-    String[] childFrom = {Task.COLUMN_NAME_DESCRIPTION};
+    String[] childFrom = {Task.COLUMN_NAME_SUBJECT};
     int[] groupTo = {android.R.id.text1};
     int[] childTo = {android.R.id.text2};
     int groupLayout = android.R.layout.simple_expandable_list_item_1;

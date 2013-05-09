@@ -2,8 +2,10 @@ package com.vsoued.gtd;
 
 import java.util.HashMap;
 
+import com.vsoued.gtd.Tasks.Accounts;
 import com.vsoued.gtd.Tasks.Task;
 
+import android.accounts.Account;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -47,6 +49,21 @@ public class GTDDB {
         values.put(Task.COLUMN_NAME_CREATE_DATE, time);
         values.put(Task.COLUMN_NAME_MODIFICATION_DATE, time);
         return db.insert(Task.TABLE_NAME_TASKS, null, values);  
+    }
+    
+    public long addAccount(String user, String password, String imap_host, String imap_port, String smtp_host, String smtp_port){
+        ContentValues values = new ContentValues();  
+        values.put(Accounts.COLUMN_NAME_USER, user);  
+        values.put(Accounts.COLUMN_NAME_PASSWORD, password);
+        values.put(Accounts.COLUMN_NAME_IMAP_HOST, imap_host);
+        values.put(Accounts.COLUMN_NAME_IMAP_PORT, imap_port);
+        values.put(Accounts.COLUMN_NAME_SMTP_HOST, smtp_host);
+        values.put(Accounts.COLUMN_NAME_SMTP_PORT, smtp_port);
+        return db.insert(Accounts.TABLE_NAME_ACCOUNTS, null, values);  
+    }
+    
+    public long deleteAccount(long id){
+        return db.delete(Accounts.TABLE_NAME_ACCOUNTS,Accounts._ID+" = "+id ,null);
     }
     
     

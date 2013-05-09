@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme" >
         
         <activity
-            android:name="com.vsoued.gtd.Main">
+            android:name="com.vsoued.gtd.Main"
+            android:uiOptions="splitActionBarWhenNarrow" >
             <!-- android:windowSoftInputMode="adjustPan|adjustResize" -->
             
             

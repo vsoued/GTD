@@ -30,7 +30,7 @@ import android.os.AsyncTask;
  
  
 public class Mail extends javax.mail.Authenticator {
-    private String _user; 
+    public String _user; 
     private String _pass; 
    
     private String[] _to; 

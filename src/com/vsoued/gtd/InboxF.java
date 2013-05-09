@@ -54,39 +54,39 @@ public class InboxF extends GTDListF {
             super.onActivityCreated(savedInstanceState);
             
             
-        }  
-        
-        @Override
-        public void onResume(){
-        
-           
-                super.onResume();
-                // Get the account list, and pick the first one
-//                AccountManager.get(context).getAccountsByTypeAndFeatures(ACCOUNT_TYPE_GOOGLE, FEATURES_MAIL,
-//                        new AccountManagerCallback() {
-//                            @Override
-//                            public void run(AccountManagerFuture future) {
-//                                Account[] accounts = null;
-//                                try {
-//                                    accounts = (Account[]) future.getResult();
-//                                    if (accounts != null && accounts.length > 0) {
-//                                        selectedAccount = accounts[0].name;
-//                                        //queryLabels(selectedAccount);
-//                                    }
-//
-//                                } catch (OperationCanceledException oce) {
-//                                    // TODO: handle exception
-//                                } catch (IOException ioe) {
-//                                    // TODO: handle exception
-//                                } catch (AuthenticatorException ae) {
-//                                    // TODO: handle exception
-//                                }
-//                            }
-//                        }, null );
+        }
 
-            
-            super.onResume();
+        
+//        @Override
+//        public void onResume(){
+//        
+//                super.onResume();
+//                // Get the account list, and pick the first one
+////                AccountManager.get(context).getAccountsByTypeAndFeatures(ACCOUNT_TYPE_GOOGLE, FEATURES_MAIL,
+////                        new AccountManagerCallback() {
+////                            @Override
+////                            public void run(AccountManagerFuture future) {
+////                                Account[] accounts = null;
+////                                try {
+////                                    accounts = (Account[]) future.getResult();
+////                                    if (accounts != null && accounts.length > 0) {
+////                                        selectedAccount = accounts[0].name;
+////                                        //queryLabels(selectedAccount);
+////                                    }
+////
+////                                } catch (OperationCanceledException oce) {
+////                                    // TODO: handle exception
+////                                } catch (IOException ioe) {
+////                                    // TODO: handle exception
+////                                } catch (AuthenticatorException ae) {
+////                                    // TODO: handle exception
+////                                }
+////                            }
+////                        }, null );
+//
+//            
+//            super.onResume();
                 
             
-        }
+//        }
 }

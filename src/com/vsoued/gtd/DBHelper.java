@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.vsoued.gtd.Tasks.Task;
+import com.vsoued.gtd.Tasks.Accounts;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -44,6 +45,16 @@ public class DBHelper extends SQLiteOpenHelper {
         
        
         db.execSQL("INSERT INTO "+Task.TABLE_NAME_TASKS+" VALUES (0,'','','"+Task.FOLDER_PROJECTS+"','',0,0,0,0,'',0,0,'')");
+        
+        db.execSQL("CREATE TABLE " + Accounts.TABLE_NAME_ACCOUNTS + " ("
+                + Accounts._ID + " INTEGER PRIMARY KEY,"
+                + Accounts.COLUMN_NAME_USER + " TEXT,"
+                + Accounts.COLUMN_NAME_PASSWORD + " TEXT,"
+                + Accounts.COLUMN_NAME_IMAP_HOST + " TEXT,"
+                + Accounts.COLUMN_NAME_IMAP_PORT + " TEXT,"
+                + Accounts.COLUMN_NAME_SMTP_HOST + " TEXT,"
+                + Accounts.COLUMN_NAME_SMTP_PORT + " TEXT"
+                + ");");
     }
 
     /**

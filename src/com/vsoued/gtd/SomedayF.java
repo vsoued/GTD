@@ -15,6 +15,7 @@ public class SomedayF extends GTDListF {
 
     public SomedayF() {}
   
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i(TAG, "CREATED");
         super.TAG = TAG;
@@ -23,4 +24,7 @@ public class SomedayF extends GTDListF {
         super.folder = this.folder;
         super.onActivityCreated(savedInstanceState);
     }
+    
+    
+    
 }

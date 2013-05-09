@@ -127,6 +127,55 @@ public final class Tasks {
         public static final String TAG_EMAIL = "email";
         public static final String TAG_MEETING = "meeting";
     }
+    
+    public static final class Accounts implements BaseColumns {
+        
+        /**
+         * The table names
+         */
+        public static final String TABLE_NAME_ACCOUNTS = "accounts";
+  
+        /*
+         * Column definitions
+         */
+
+        /**
+         * Column name for the subject of the task
+         * <P>Type: TEXT</P>
+         */
+        public static final String COLUMN_NAME_USER = "user";
+
+        /**
+         * Column name of the task description
+         * <P>Type: TEXT</P>
+         */
+        public static final String COLUMN_NAME_PASSWORD = "password";
+
+        /**
+         * Column name for the creation timestamp
+         * <P>Type: INTEGER (long from System.curentTimeMillis())</P>
+         */
+        public static final String COLUMN_NAME_IMAP_PORT = "imapport";
+
+        /**
+         * Column name for the modification timestamp
+         * <P>Type: INTEGER (long from System.curentTimeMillis())</P>
+         */
+        public static final String COLUMN_NAME_IMAP_HOST = "imaphost";
+        
+        /**
+         * Column name for the PATH
+         * <P>Type: INTEGER (long from System.curentTimeMillis())</P>
+         */
+        public static final String COLUMN_NAME_SMTP_PORT = "smtpport";
+        
+        /**
+         * Column name for the folder the task is in
+         * <P>Type: TEXT</P>
+         */
+        public static final String COLUMN_NAME_SMTP_HOST = "smtphost";
+        
+    }
         
 }
 

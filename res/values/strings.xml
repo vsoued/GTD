@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">GTDapp</string>
+    <string name="app_name">GTD</string>
     <string name="title_all">All</string>
     <string name="title_email">E-Mail</string>
     <string name="title_phonecalls">Phone Calls</string>

@@ -37,6 +37,9 @@ public class ProjectsF extends GTDListF {
         
     }
     
+
+    
+    
     @Override
     void showDetails(long id) {
         

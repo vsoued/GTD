@@ -39,6 +39,7 @@ public class NewTask extends Activity {
         SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, R.array.folders_array, 
                 android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setSelection(this.getIntent().getIntExtra("folder", 0));
         
         spinner2 = (Spinner) findViewById(R.id.spinner2);    
         // Create an ArrayAdapter using the string array and a default spinner layout

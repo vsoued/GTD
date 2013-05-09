@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
 import android.widget.ListView;
@@ -63,15 +65,14 @@ public abstract class GTDListF extends ListFragment {
 
         
         @Override
-        public void onStart(){
-            super.onStart();
+        public void onResume(){
+            super.onResume();
             Log.i(TAG, "SHOW "+folder);
             ListView listv =  getListView();
             //listv.addHeaderView(v)
             listv.setFastScrollEnabled(true);
             listv.setTextFilterEnabled(true);
-            
-            
+            //listv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             setAdapter();
         }
         
@@ -84,6 +85,5 @@ public abstract class GTDListF extends ListFragment {
             setListAdapter(adapter);
             db.close();
         }
-        
         
 }

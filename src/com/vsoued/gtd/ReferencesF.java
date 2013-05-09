@@ -21,6 +21,7 @@ public class ReferencesF extends GTDListF {
 
     public ReferencesF() {}
     
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i(TAG,"CREATED");
         super.TAG = TAG;
@@ -29,4 +30,7 @@ public class ReferencesF extends GTDListF {
         super.folder = this.folder;
         super.onActivityCreated(savedInstanceState);
     }
+    
+   
+    
 }

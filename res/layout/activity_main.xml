@@ -8,12 +8,19 @@
     
    
     
-    <ListView 
+    <!-- <ListView 
         android:id="@android:id/list"
         android:layout_width="0dip"
         android:layout_height="fill_parent"
         android:layout_weight="1" >
-    </ListView>
+    </ListView> -->
+    
+    <TabHost
+    android:id="@android:id/tabhost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+    </TabHost>
     
     
     
@@ -21,6 +28,7 @@
               android:id="@+id/inbox"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
+    
     <!-- <fragment class ="com.vsoued.gtd.MailInbox"
               android:id="@+id/mail_inbox"
               android:layout_width="match_parent"
@@ -31,17 +39,15 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
     
-    
     <fragment class="com.vsoued.gtd.NextActionF"
               android:id="@+id/nextaction"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
+    
     <fragment class="com.vsoued.gtd.ProjectsF"
               android:id="@+id/projects"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
-    
-    
     
     <fragment class="com.vsoued.gtd.PendingF"
               android:id="@+id/pending"
@@ -57,7 +63,6 @@
               android:id="@+id/someday"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
-    
     
     
 </LinearLayout>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.vsoued.gtd.Tasks.Accounts;
 import com.vsoued.gtd.Tasks.Task;
 
 import android.accounts.Account;
@@ -35,6 +36,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,11 +92,24 @@ public class Main extends Activity implements
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
         
+        db = new GTDDB(this);
+        
         accounts = new ArrayList<Mail>();
+        
+        db.open();
+        Cursor a = db.getAccounts();
+        a.moveToFirst();
+        while (!a.isAfterLast()){
+            accounts.add(new Mail(a.getString(a.getColumnIndex(Accounts.COLUMN_NAME_USER)),
+                    a.getString(a.getColumnIndex(Accounts.COLUMN_NAME_PASSWORD))));
+            a.moveToNext();
+        }
+        
+        db.close();
         //accounts.add(new Mail("vsoued@gmail.com","kjhkhkjh"));
 
 
-        db = new GTDDB(this);
+      
         
         setContentView(R.layout.activity_main);
         
@@ -149,10 +164,49 @@ public class Main extends Activity implements
         getMenuInflater().inflate(R.menu.activity_main, menu);
         SubMenu submenu = menu.addSubMenu(144, SubMenu.NONE, SubMenu.NONE , "Inbox");
         submenu.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-//        sub.setHeaderTitle("Account");
-        int id = 123;
+        submenu.add(SubMenu.NONE, 100, SubMenu.NONE , "Inbox");
+        submenu.findItem(100).setOnMenuItemClickListener(
+                new OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        FragmentTransaction ft = manager.beginTransaction();
+                        //host.setVisibility(2);
+                        Log.i("main", "transaction");
+                        for (int i : POSITIONS){
+                            if (i == POSITIONS[0]){
+                                ft.show(manager.findFragmentById(i));
+                            } else {
+                                ft.hide(manager.findFragmentById(i));
+                            }
+                        }
+                        ft.commit();
+//                      sub.setHeaderTitle("Account");
+                        return true;
+                    }
+                });
+
+        int id = 0;
         for (Mail m: accounts){
             submenu.add(SubMenu.NONE, id, SubMenu.NONE,m._user);
+            submenu.findItem(id).setOnMenuItemClickListener(
+                    new OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            FragmentTransaction ft = manager.beginTransaction();
+                            Fragment f = manager.findFragmentByTag(accounts.get(item.getItemId())._user);
+                            if (manager.findFragmentByTag(accounts.get(item.getItemId())._user) == null){
+                                f = new MailFragment(accounts.get(item.getItemId()));
+                                ft.add(R.id.container, f, accounts.get(item.getItemId())._user);
+                            } else {
+                                ft.show(f);
+                            }
+                            for (int i : POSITIONS){
+                                ft.hide(manager.findFragmentById(i));
+                            }
+                            ft.commit();
+                            return true;
+                        }
+                    });
             id++;
         }
        if (getActionBar().getSelectedNavigationIndex() != 0){
@@ -180,10 +234,6 @@ public class Main extends Activity implements
             case R.id.menu_search:
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(getCurrentFocus(), InputMethodManager.SHOW_IMPLICIT);
-            case 123:
-                return true;
-            case 124:
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

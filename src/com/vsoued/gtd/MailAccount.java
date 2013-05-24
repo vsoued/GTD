@@ -42,7 +42,9 @@ public class MailAccount extends Activity {
                 Intent data = new Intent();
                 data.putExtra("auth", new String[]{user,password}); 
                 setResult(RESULT_OK, data); 
+                db.open();
                 db.addAccount(user, password,  "imap.gmail.com", "993", "smtp.gmail.com", "465");
+                db.close();
                 finish();
                 return true;
             default:

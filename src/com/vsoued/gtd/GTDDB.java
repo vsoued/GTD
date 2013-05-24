@@ -62,6 +62,12 @@ public class GTDDB {
         return db.insert(Accounts.TABLE_NAME_ACCOUNTS, null, values);  
     }
     
+    public Cursor getAccounts(){
+        String[] columns = new String[] {Accounts._ID, Accounts.COLUMN_NAME_USER, Accounts.COLUMN_NAME_PASSWORD};  
+        Cursor cursor = db.query(Accounts.TABLE_NAME_ACCOUNTS,columns,null, null, null, null,null);  
+        return cursor;
+    }
+    
     public long deleteAccount(long id){
         return db.delete(Accounts.TABLE_NAME_ACCOUNTS,Accounts._ID+" = "+id ,null);
     }

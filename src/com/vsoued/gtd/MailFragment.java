@@ -17,7 +17,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 
 
-public class MailInbox extends ListFragment{
+public class MailFragment extends ListFragment{
     int[] views = {android.R.id.text1, android.R.id.text2};
     final String ACCOUNT_TYPE_GOOGLE = "com.google";
     final String[] FEATURES_MAIL = {
@@ -26,17 +26,22 @@ public class MailInbox extends ListFragment{
     String selectedAccount;
     Context context;
     ArrayAdapter<String> adapter;
-    Mail mail = new Mail("vsoued@gmail.com", "hek:190688");
+    Mail mail;
     
-    public MailInbox() {
+    public MailFragment(Mail mail) {
+        this.mail = mail;
+    }
+    
+    public MailFragment() {
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         Log.i("MAIL_INBOX", "ON ACTIVITY CREATED");
         context = getActivity();
         adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1);
-        super.onActivityCreated(savedInstanceState);
+        
         
         
 //        Void[] n = {null};
@@ -150,10 +155,11 @@ public class MailInbox extends ListFragment{
 //        adapter = new ArrayAdapter<String>(getActivity(), 
 //                android.R.layout.simple_list_item_1, msgs);
        adapter.addAll(msgs);
+       setListAdapter(adapter);
         
 //        Log.i("MAIL_INBOX", "adapter created");
 //
-//        
-        setListAdapter(adapter);
+//  
+        
     }
 }

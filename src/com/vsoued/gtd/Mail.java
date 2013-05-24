@@ -286,7 +286,7 @@ public class Mail extends javax.mail.Authenticator {
                 int count = inbox.getMessageCount();
                 //int newcount = inbox.getMessageCount();
 //                System.out.println("COUNT "+newcount);
-                Message[] msgs = inbox.getMessages(count - topmessage, count);
+                Message[] msgs = inbox.getMessages(count-10, count);
                 
                 topmessage = msgs[msgs.length-1].getMessageNumber();
 //                for (int i = 0; i < msgs.length; i++){
